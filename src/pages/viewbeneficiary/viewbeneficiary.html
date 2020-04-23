@@ -1,0 +1,71 @@
+
+<ion-header>
+
+  <ion-navbar hideBackButton>
+      <ion-buttons left>
+          <button ion-button (click)="this.navCtrl.pop({animation: 'ios-transition'})" padding>
+              <ion-icon class="customIcon" name="arrow-back" style="zoom:1.4;"></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-title>View Beneficiary</ion-title>
+   </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <!-- ================================refresh==================== -->
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="ios-small"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
+      <!-- ============== -->
+
+
+
+
+  <!-- ==================================== -->
+
+  <ion-searchbar (keyup)="getItems($event)"></ion-searchbar>
+  <!-- ============================================ -->
+
+
+
+<ion-list>
+      <div *ngIf="checkm">
+
+                <ion-label text-center>No Beneficiary available</ion-label>
+
+</div>
+
+
+
+<!-- ================================================ -->
+          <div *ngIf="items || checkm1">
+
+          <ion-grid >
+              <ion-card *ngFor="let i of items">
+                <!-- ====================================== -->
+            <ion-row padding>
+              <ion-col  col-9>
+                <div class="textsize">{{i.name}}</div><br><div class="textwidth textsize">{{i.mobileno}}</div>
+
+
+              </ion-col>
+              <ion-col col-3>
+                  <button ion-button  type="button" (click)="delete(i)"><ion-icon item-end name="md-trash"></ion-icon></button>
+              </ion-col>
+
+            </ion-row>
+          </ion-card>
+          </ion-grid>
+
+      </div>
+
+        </ion-list>
+ </ion-content>

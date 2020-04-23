@@ -1,0 +1,103 @@
+<ion-header>
+
+  <ion-navbar hideBackButton>
+      <ion-buttons left>
+          <button ion-button (click)="this.navCtrl.pop({animation: 'ios-transition'})" padding>
+              <ion-icon class="customIcon" name="arrow-back" style="zoom:1.4;"></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-title>Register</ion-title>
+   </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+
+
+  <form #registrationForm="ngForm" (ngSubmit)="register(registrationForm)" name="registrationForm">
+
+
+      <ion-item  [class.has-error]="name1.invalid && name1.touched" [class.has-success]="name1.valid">
+          <ion-label stacked><b>Name</b></ion-label>
+          <ion-input  type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Ex: Jhonny" pattern="^[A-Za-z ]{2,35}$" id="#name1" required #name1="ngModel"></ion-input>
+        </ion-item>
+        <ion-label padding-left  style="color:red" *ngIf="name1.touched && name1.pristine">Name is required</ion-label>
+          <ion-label padding-left  style="color:red" *ngIf="name1.invalid && name1.dirty && name1.touched">Invalid Name</ion-label>
+
+
+
+
+    <ion-item  [class.has-error]="mno1.invalid && mno1.touched" [class.has-success]="mno1.valid">
+        <ion-label stacked><b>Mobile Number</b></ion-label>
+        <ion-input type="text" class="form-control" [(ngModel)]="mno" name="mno" pattern="[0-9]{10}" placeholder="Ex: 1234567890" pattern="[0-9]{10}" required #mno1="ngModel"></ion-input>
+      </ion-item>
+      <ion-label padding-left  style="color:red" *ngIf="mno1.touched && mno1.pristine">Mobile number is required</ion-label>
+      <ion-label padding-left  style="color:red" *ngIf="mno1.invalid && mno1.dirty && mno1.touched">Invalid Mobile number</ion-label>
+
+
+<ion-item  [class.has-error]="password1.invalid && password1.touched" [class.has-success]="password1.valid">
+  <ion-label stacked><b>Password</b></ion-label>
+  <ion-input id="password2" clearOnEdit="false" type="{{type}}" class="form-control" [(ngModel)]="password" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@*#$%^&()])[A-Za-z0-9!@#$*%^&()]{8,14}"  placeholder="Minimum 8 characters"  required #password1="ngModel"></ion-input>
+  <button padding-top ion-button clear color="primary" style="zoom:1.3;" type="button" item-right *ngIf="show" (click)="myFunction()"><ion-icon  name="md-eye-off"></ion-icon></button>
+  <button padding-top ion-button clear color="primary" type="button" style="zoom:1.3;" item-right *ngIf="!show" (click)="myFunction()"><ion-icon  name="md-eye"></ion-icon></button>
+</ion-item>
+<ion-label padding-left  style="color:red" *ngIf="password1.touched && password1.pristine">Password is required</ion-label>
+  <ion-label padding-left text-wrap text-justify  style="color:red" *ngIf="password1.invalid && password1.dirty && password1.touched">Must be combination of atleast one uppercase,one lowercase, one digit and one special character</ion-label>
+
+
+
+
+
+
+
+  <ion-item  [class.has-error]="cpassword1.invalid && cpassword1.touched" [class.has-success]="cpassword1.valid">
+      <ion-label stacked><b>Confirm password</b></ion-label>
+      <ion-input type="{{type1}}" clearOnEdit="false" class="form-control" [(ngModel)]="cpassword" name="cpassword" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@*#$%^&()])[A-Za-z0-9!@#$*%^&()]{8,14}"  #cpassword1="ngModel"></ion-input>
+      <button padding-top ion-button clear color="primary" style="zoom:1.3;" type="button" item-right *ngIf="show1" (click)="myFunction1()"><ion-icon  name="md-eye-off"></ion-icon></button>
+      <button padding-top ion-button clear color="primary" type="button" style="zoom:1.3;" item-right *ngIf="!show1" (click)="myFunction1()"><ion-icon  name="md-eye"></ion-icon></button>
+    </ion-item>
+
+    <ion-label padding-left  style="color:red" *ngIf="cpassword1.touched && cpassword1.pristine">Password is required</ion-label>
+      <ion-label padding-left  style="color:red" *ngIf="!(registrationForm.value.password==registrationForm.value.cpassword) && cpassword1.dirty && cpassword1.touched">Password Mismatch</ion-label>
+
+
+
+
+                    <ion-item  [class.has-error]="email1.invalid && email1.touched" [class.has-success]="email1.valid ">
+                    <ion-label stacked><b>Email ID</b></ion-label>
+                    <ion-input type="email" class="form-control" [(ngModel)]="email" name="email" pattern="([A-Za-z]|[0-9])[A-Za-z0-9.]+[A-Za-z0-9]+@[A-Za-z0-9]{2,}\[.]{1}[a-z]{2,3}" placeholder="Ex: abc@gmail.com" required #email1="ngModel"></ion-input>
+                  </ion-item>
+                  <ion-label padding-left  style="color:red" *ngIf="email1.touched && email1.pristine">Email ID is required</ion-label>
+                    <ion-label padding-left  style="color:red" *ngIf="email1.invalid && email1.dirty && email1.touched">Invalid Email ID</ion-label>
+                    <ion-grid no-padding >
+                      <ion-row no-padding>
+
+                  <ion-col col-4  style="padding-bottom: 0px;padding-top:5%;padding-left:4%;padding-right:0%" text-left>
+                      <button type="button" [disabled]="email1.invalid ||(OTPV.valid && verifyclicked) ||!(resendenable && email1.valid )" (click)="verifyemail(registrationForm)"  ion-button>{{buttonname}}</button>
+                  </ion-col>
+
+                  <ion-col text-left>
+                      <ion-item [class.has-error]="OTPV.invalid && OTPV.touched" [class.has-success]="OTPV.valid">
+                          <ion-label stacked><b>OTP</b></ion-label>
+                          <ion-input type="text" class="form-control" [(ngModel)]="OTP" name="OTP" pattern="[0-9]{6}"  required #OTPV="ngModel"></ion-input>
+                        </ion-item>
+                        <ion-label padding-left  style="color:red" *ngIf="OTPV.touched && OTPV.pristine">OTP is required</ion-label>
+                        <ion-label padding-left  style="color:red" *ngIf="OTPV.invalid && OTPV.dirty && OTPV.touched">Invalid OTP</ion-label>
+                  </ion-col>
+
+                </ion-row>
+              </ion-grid>
+              <!-- <div class="text-center"><span padding-left style="color:rgb(27, 153, 231)" *ngIf="verifyclicked">This OTP is valid upto 2 miniutes,If you haven't received OTP yet, click resend  after 2 miniutes button.</span></div> -->
+
+              <ion-label padding-left text-wrap text-justify style="color:rgb(0, 162, 255)" *ngIf="verifyclicked">This OTP is valid upto 2 miniutes,If you haven't received OTP yet,click resend  after 2 miniutes button.</ion-label>
+
+
+      <ion-label text-center><button type="submit" [disabled]="(registrationForm.invalid)  || !(verifyclicked && registrationForm.valid) || !(registrationForm.value.password==registrationForm.value.cpassword)" ion-button>Register</button></ion-label>
+
+
+
+</form>
+
+
+</ion-content>

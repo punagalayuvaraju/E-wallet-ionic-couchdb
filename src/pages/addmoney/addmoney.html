@@ -1,0 +1,170 @@
+<ion-header>
+  <ion-navbar hideBackButton>
+      <ion-buttons left>
+          <button ion-button (click)="this.navCtrl.pop({animation: 'ios-transition'})" padding>
+              <ion-icon class="customIcon" name="arrow-back" style="zoom:1.4;"></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-title>Add Money</ion-title>
+   </ion-navbar>
+</ion-header>
+
+  <ion-content padding>
+
+      <form #userForm="ngForm" (ngSubmit)="addMoney(userForm)" name="myForm">
+
+
+      <ion-item  [class.has-error]="amount1.invalid && amount1.touched" [class.has-success]="amount1.valid">
+          <ion-label stacked><b>Enter Amount</b></ion-label>
+          <ion-input type="text" class="form-control" [(ngModel)]="amount" name="amount" pattern="[0-9]{0,}" required #amount1="ngModel"></ion-input>
+        </ion-item>
+          <ion-label style="color:red"  *ngIf="amount1.touched && amount1.pristine">Amount is required</ion-label>
+          <ion-label style="color:red"  *ngIf="amount1.invalid && amount1.dirty && amount1.touched">Invalid Amount</ion-label>
+          <ion-label padding-left style="color:red"  *ngIf="!(userForm.value.amount&lt;=100000 && userForm.value.amount&gt;0) && amount1.dirty && amount1.touched">Amount should be within Rs:1 to Rs:100000</ion-label>
+      <h1>
+        <ion-label padding-left stacked><b>ADD MONEY USING</b></ion-label>
+        </h1>
+
+                    &emsp;  <ion-grid radio-group [(ngModel)]="size" name="size">
+                          <ion-row>
+                            <ion-col>
+                                <ion-radio #debitcard  value="debitcard" checked></ion-radio>&nbsp;Debit card
+                              </ion-col>
+                            <ion-col>
+                                <ion-radio  #creditcard value="creditcard"  ></ion-radio>&nbsp;Credit card
+                              </ion-col>
+
+                          </ion-row>
+                        </ion-grid>
+
+                        <!-- ================================================= -->
+                      <div *ngIf="debitcard.checked">
+                                <ion-card class="b">
+                              <ion-card-content>
+
+                                    <ion-item  [class.has-error]="cnumber1.invalid && cnumber1.touched" [class.has-success]="cnumber1.valid">
+                                            <ion-label stacked><b>Card Number</b></ion-label>
+                                            <ion-input type="text" class="form-control" [(ngModel)]="dnumber" name="dnumber" placeholder="Ex: 1234 1234 1234 1234" pattern="([0-9]){4}([ ]){1}([0-9]){4}([ ]){1}([0-9]){4}([ ]){1}([0-9]){4}" required #cnumber1="ngModel"></ion-input>
+                                            </ion-item>
+                                            <ion-label style="color:red"  *ngIf="cnumber1.touched && cnumber1.pristine">Card Number is required</ion-label>
+                                            <ion-label style="color:red"  *ngIf="cnumber1.invalid && cnumber1.dirty && cnumber1.touched">Invalid Card Number</ion-label>
+                              </ion-card-content>
+
+
+                              <ion-card-content>
+                                 <ion-item  [class.has-error]="cvv1.invalid && cvv1.touched" [class.has-success]="cvv1.valid">
+                                        <ion-label stacked><b>CVV Code</b></ion-label>
+                                        <ion-input type="text" class="form-control" placeholder="Ex: 123" [(ngModel)]="dcvv" name="dcvv" pattern="[0-9]{3}" required #cvv1="ngModel"></ion-input>
+                                      </ion-item>
+                                        <ion-label style="color:red"  *ngIf="cvv1.touched && cvv1.pristine">CVV Code is required</ion-label>
+                                        <ion-label style="color:red"  *ngIf="cvv1.invalid && cvv1.dirty && cvv1.touched">Invalid CVV Code</ion-label>
+                                    </ion-card-content>
+
+                                    <ion-card-content>
+                                <ion-item  [class.has-error]="name1.invalid && name1.touched" [class.has-success]="name1.valid">
+                                    <ion-label stacked><b>Cardholder name</b></ion-label>
+                                    <ion-input type="text" class="form-control" [(ngModel)]="name" placeholder="Ex: Jhonny" name="name" pattern="[a-zA-Z ]{0,}" required #name1="ngModel"></ion-input>
+                                  </ion-item>
+                                    <ion-label style="color:red"  *ngIf="name1.touched && name1.pristine">cardholder-name is required</ion-label>
+                                    <ion-label style="color:red"  *ngIf="name1.invalid && name1.dirty && name1.touched">Invalid cardholder-name</ion-label>
+                                </ion-card-content>
+
+                                <ion-grid>
+                                             <ion-row>
+                                               <ion-col>
+
+                                    <ion-item  [class.has-error]="dmonth1.invalid && dmonth1.touched" [class.has-success]="dmonth1.valid">
+                                        <ion-label stacked><b>Month</b></ion-label>
+                                        <ion-input type="text" class="form-control" [(ngModel)]="dmonth" name="dmonth" placeholder="MM" pattern="([0]{1}[1-9]{1})|([1]{1}[0-2]{1})"  required #dmonth1="ngModel"></ion-input>
+                                      </ion-item>
+                                        <ion-label style="color:red"   *ngIf="dmonth1.touched && dmonth1.pristine">Month is required</ion-label>
+                                        <ion-label style="color:red"  *ngIf="dmonth1.invalid && dmonth1.dirty && dmonth1.touched">Invalid Month</ion-label>
+                                        <!-- <ion-label  *ngIf="!(userForm.value.amount&lt;=10000 && userForm.value.amount&gt;0) && dmonth1.dirty && dmonth1.touched">Invalid month</ion-label> -->
+
+
+                                      </ion-col>
+
+                                      <ion-col>
+
+
+                                        <ion-item  [class.has-error]="dyear1.invalid && dyear1.touched" [class.has-success]="dyear1.valid">
+                                            <ion-label stacked><b>Year</b></ion-label>
+                                            <ion-input type="text" class="form-control" [(ngModel)]="dyear" name="dyear" placeholder="YY" pattern="([0-9]){1}([0-9]){1}" required #dyear1="ngModel"></ion-input>
+                                          </ion-item>
+                                            <ion-label style="color:red"  *ngIf="dyear1.touched && dyear1.pristine">year is required</ion-label>
+                                            <ion-label style="color:red"  *ngIf="dyear1.invalid && dyear1.dirty && dyear1.touched">Invalid year</ion-label>
+
+                                        </ion-col>
+                                </ion-row>
+                             </ion-grid>
+
+
+                             </ion-card>
+
+                                    </div>
+                      <!-- ===================================== -->
+
+                    <div *ngIf="creditcard.checked">
+                              <ion-card class="b">
+                            <ion-card-content>
+                                    <ion-item  [class.has-error]="cnumber1.invalid && cnumber1.touched" [class.has-success]="cnumber1.valid">
+                                            <ion-label stacked><b>Card Number</b></ion-label>
+                                            <ion-input type="text" class="form-control" [(ngModel)]="dnumber" name="dnumber" placeholder="Ex: 1234 1234 1234 1234" pattern="([0-9]){4}([ ]){1}([0-9]){4}([ ]){1}([0-9]){4}([ ]){1}([0-9]){4}" required #cnumber1="ngModel"></ion-input>
+                                          </ion-item>
+                                            <ion-label style="color:red"  *ngIf="cnumber1.touched && cnumber1.pristine">cardholder-number is required</ion-label>
+                                            <ion-label style="color:red"  *ngIf="cnumber1.invalid && cnumber1.dirty && cnumber1.touched">Invalid cardholder-number</ion-label>
+                           </ion-card-content>
+
+                           <ion-card-content>
+                                            <ion-item  [class.has-error]="cvv1.invalid && cvv1.touched" [class.has-success]="cvv1.valid">
+                                                    <ion-label stacked><b>CVV Code</b></ion-label>
+                                                    <ion-input type="text" class="form-control" [(ngModel)]="dcvv" name="dcvv" placeholder="Ex: 123" pattern="[0-9]{3}" id="cvv-code" required #cvv1="ngModel"></ion-input>
+                                                  </ion-item>
+                                                    <ion-label style="color:red"  *ngIf="cvv1.touched && cvv1.pristine">CVV Code is required</ion-label>
+                                                    <ion-label style="color:red"  *ngIf="cvv1.invalid && cvv1.dirty && cvv1.touched">Invalid CVV Code</ion-label>
+                                                </ion-card-content>
+
+                                                <ion-card-content>
+                       <ion-item  [class.has-error]="name1.invalid && name1.touched" [class.has-success]="name1.valid">
+                            <ion-label stacked><b>Cardholder name</b></ion-label>
+                            <ion-input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Ex: Jhonny"  pattern="[a-zA-Z ]{0,}" required #name1="ngModel"></ion-input>
+                          </ion-item>
+                            <ion-label style="color:red"  *ngIf="name1.touched && name1.pristine">Cardholder-name is required</ion-label>
+                            <ion-label style="color:red"  *ngIf="name1.invalid && name1.dirty && name1.touched">Invalid cardholder-name</ion-label>
+                        </ion-card-content>
+                                      <ion-grid>
+                                          <ion-row>
+                                            <ion-col>
+
+                                <ion-item  [class.has-error]="dmonth1.invalid && dmonth1.touched" [class.has-success]="dmonth1.valid">
+                                    <ion-label stacked><b>Month</b></ion-label>
+                                    <ion-input type="text" class="form-control" [(ngModel)]="dmonth" name="dmonth" placeholder="MM" pattern="([0]{1}[1-9]{1})|([1]{1}[0-2]{1})"  required #dmonth1="ngModel"></ion-input>
+                                  </ion-item>
+                                    <ion-label style="color:red"  *ngIf="dmonth1.touched && dmonth1.pristine">Month is required</ion-label>
+                                    <ion-label style="color:red"  *ngIf="dmonth1.invalid && dmonth1.dirty && dmonth1.touched">Invalid Month</ion-label>
+                              </ion-col>
+
+                              <ion-col>
+                                  <ion-item  [class.has-error]="dyear1.invalid && dyear1.touched" [class.has-success]="dyear1.valid">
+                                      <ion-label stacked><b>Year</b></ion-label>
+                                      <ion-input type="text" class="form-control" [(ngModel)]="dyear" name="dyear" placeholder="YY" pattern="([0-9]){1}([0-9]){1}"  required #dyear1="ngModel"></ion-input>
+                                    </ion-item>
+
+                                      <ion-label style="color:red"  *ngIf="dyear1.touched && dyear1.pristine">Year is required</ion-label>
+                                      <ion-label style="color:red"  *ngIf="dyear1.invalid && dyear1.dirty && dyear1.touched">Invalid Year</ion-label>
+                                  </ion-col>
+                                </ion-row>
+                             </ion-grid>
+
+
+                             </ion-card>
+                          </div>
+
+            <!-- =============================== -->
+
+          <ion-label text-center><button ion-button [disabled]="!userForm.valid || !(userForm.value.amount&lt;=100000 && userForm.value.amount&gt;0)">Add Money</button></ion-label>
+
+    </form>
+
+
+  </ion-content>

@@ -1,0 +1,96 @@
+<ion-header>
+  <ion-navbar>
+      <ion-buttons left start>
+          <button ion-button menuToggle>
+              <ion-icon name="menu"></ion-icon>
+            </button>
+          </ion-buttons>
+
+    <ion-title>E-Wallet</ion-title>
+
+    <!-- <ion-buttons right end>
+        <button ion-button (click)="logout()" padding>
+            <ion-icon   md="md-log-out" style="zoom:1.4;color:white"></ion-icon>
+          </button>
+        </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding no-lines>
+
+    <ion-grid>
+            <ion-item>
+      <ion-row>
+  <ion-col text-center (click)="openpage('SendmoneyPage')">
+        <ion-icon text-center name="ios-send" style="zoom:3.0;" color="violet" ></ion-icon><br>
+         Send Money
+  </ion-col>
+
+  <ion-col text-center (click)="openpage('RequestmoneyPage')">
+        <ion-icon text-center name="ios-undo" style="zoom:3.0;" color="dark" ></ion-icon><br>
+         Request Money
+</ion-col>
+
+      </ion-row>
+      </ion-item>
+  <br>
+
+  <ion-item>
+  <ion-row>
+
+  <ion-col text-center (click)="openpage('AddmoneyPage')">
+        <ion-icon text-center md="md-cash" style="zoom:3.0;" color="secondary" ></ion-icon><br>
+         Add Money
+  </ion-col>
+  <ion-col text-center (click)="openpage('ProfilePage')">
+
+            <ion-icon text-center name="ios-contact" style="zoom:3.0;" color="redblur" ></ion-icon><br>
+             User Profile
+    </ion-col>
+  </ion-row>
+</ion-item>
+  <br>
+
+  <ion-item>
+    <ion-row>
+
+      <ion-col text-center (click)="openpage('MessagesPage')">
+          <button  class="but" id="notification-button" ion-button clear   >
+       <ion-icon text-center  icon-only   style="zoom:3.0;"  md="md-chatboxes"  color="primary"  >
+         <ion-badge *ngIf="count" id="notifications-badge" style="zoom:0.4"  color="danger">{{count}}</ion-badge>
+       </ion-icon>
+       </button>
+       <br>
+       Requests
+          </ion-col>
+          <br>
+  <ion-col text-center (click)="openpage('TransactionsPage')">
+        <ion-icon text-center  name="ios-albums" style="zoom:3.0;" color="test"  ></ion-icon><br>
+       Transaction
+  </ion-col>
+  </ion-row>
+</ion-item>
+  <br>
+
+  <ion-row>
+  <ion-col text-center (click)="openpage('QrscannerPage')">
+          <ion-icon text-center  md="md-qr-scanner" style="zoom:3.0;" color="scan"  ></ion-icon><br>
+       Qr scanner
+  </ion-col>
+
+  <ion-col text-center (click)="openpage('AddbeneficiaryPage')">
+          <ion-icon text-center md="md-person-add" style="zoom:3.0;"  color="add" ></ion-icon><br>
+           Add beneficiary
+  </ion-col>
+
+  </ion-row>
+
+    </ion-grid>
+
+    <ion-item>
+
+        </ion-item>
+
+
+    </ion-content>

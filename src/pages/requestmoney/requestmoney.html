@@ -1,0 +1,72 @@
+
+<ion-header>
+
+  <ion-navbar hideBackButton>
+      <ion-buttons left>
+          <button ion-button (click)="this.navCtrl.pop({animation: 'ios-transition'})" padding>
+              <ion-icon class="customIcon" name="arrow-back" style="zoom:1.4;"></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-title>Request Money</ion-title>
+   </ion-navbar>
+</ion-header>
+
+
+ <ion-content padding>
+
+
+
+
+
+
+   <form #requestForm="ngForm" (ngSubmit)="requestmoney(requestForm)" name="myForm">
+     <div *ngIf="accounts">
+
+
+       <div *ngIf="!id">
+        <ion-item>
+            <ion-label stacked><b>Select Beneficiary Account</b></ion-label>
+          <ion-select name="beneficiaryac" [(ngModel)]="beneficiaryac" #mno1="ngModel" required>
+            <ion-option *ngFor="let i of accounts" [(value)]="i.mobileno">{{i.mobileno}} - {{i.name}}</ion-option>
+          </ion-select>
+
+          <button padding-top ion-button clear color="primary" type="button" style="zoom:1.3;" item-right  (click)="addbeneficiary()"><ion-icon  md="md-add"></ion-icon></button>
+
+        </ion-item>
+        <ion-label padding-left  style="color:red" *ngIf="mno1.invalid  && mno1.touched">required</ion-label>
+     </div>
+     <div *ngIf="id">
+             <ion-item>
+                 <ion-label stacked><b>Beneficiary Account</b></ion-label>
+               <ion-select name="beneficiaryac" [(ngModel)]="beneficiaryac" #mno1="ngModel" required>
+                     <ion-option selected=true [(value)]="mobile" > {{mobile}} - {{name}}</ion-option>
+               </ion-select>
+             </ion-item>
+             <ion-label padding-left  style="color:red" *ngIf="mno1.invalid  && mno1.touched">required</ion-label>
+          </div>
+
+         <ion-item  [class.has-error]="amount1.invalid && amount1.touched" [class.has-success]="amount1.valid">
+             <ion-label stacked><b>Amount</b></ion-label>
+             <ion-input type="text" class="form-control" [(ngModel)]="amount" name="amount"  placeholder="Rs:" pattern="[0-9]{0,}"  required #amount1="ngModel"></ion-input>
+
+           </ion-item>
+           <ion-label padding-left  style="color:red" *ngIf="amount1.touched && amount1.pristine">Amount is required</ion-label>
+           <ion-label padding-left  style="color:red" *ngIf="amount1.dirty && amount1.touched && amount1.invalid">Invalid Amount</ion-label>
+           <ion-label padding-left  style="color:red" *ngIf="!(requestForm.value.amount&lt;=100000 && requestForm.value.amount&gt;0) && amount1.dirty && amount1.touched">Amount should be within Rs:1 to Rs:100000</ion-label>
+
+       <ion-item  [class.has-error]="comment1.invalid && comment1.touched" pattern="[a-zA-Z0-9]" [class.has-success]="comment1.valid">
+           <ion-label stacked><b>Comment(optional)</b></ion-label>
+           <ion-textarea type="text" class="form-control" [(ngModel)]="comment" name="comment"   #comment1="ngModel"></ion-textarea>
+
+         </ion-item>
+         <ion-label padding-left  style="color:red" *ngIf="comment1.invalid && comment1.dirty && comment1.touched">Invalid comment</ion-label>
+
+
+
+            <ion-label text-center><button type="submit" [disabled]="requestForm.invalid || !(requestForm.value.amount&lt;=100000 && requestForm.value.amount&gt;0)"  ion-button>Request</button></ion-label>
+
+          </div>
+
+ </form>
+
+ </ion-content>

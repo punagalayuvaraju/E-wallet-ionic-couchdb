@@ -1,0 +1,275 @@
+<ion-header>
+
+  <ion-navbar hideBackButton>
+      <ion-buttons left>
+          <button ion-button (click)="this.navCtrl.pop({animation: 'ios-transition'})" padding>
+              <ion-icon class="customIcon" name="arrow-back" style="zoom:1.4;"></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-title>Transactions</ion-title>
+   </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding >
+
+
+    <!-- ================================refresh==================== -->
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+            <ion-refresher-content
+              pullingIcon="arrow-dropdown"
+              pullingText="Pull to refresh"
+              refreshingSpinner="ios-small"
+              refreshingText="Refreshing...">
+            </ion-refresher-content>
+          </ion-refresher>
+          <!-- ============== -->
+
+ <!-- ==================================== -->
+
+ <ion-searchbar (keyup)="getItems($event)"></ion-searchbar>
+ <!-- ============================================ -->
+
+
+
+
+
+  <div *ngIf="checkm">
+
+            <ion-label text-center>  No Transactions available</ion-label>
+
+    </div>
+
+        <!-- ======================================= -->
+
+         <div *ngIf="items && Profiledata">
+
+        <ion-grid *ngFor="let i of items">
+                  <!-- ============================================= -->
+
+          <ion-card class="b">
+
+
+
+              <ion-card-header>
+                  <div class="" style="text-align: center" *ngIf=" Profiledata.mobilenumber==i.from ">
+                    <span class="title"> You </span>
+                    <br>({{i.from}})
+                  </div>
+                  <div text-wrap class="" style="text-align: center" *ngIf=" Profiledata.mobilenumber==i.to ">
+                    <span class="title"> {{i.fromname | uppercase}}</span>
+                    <br>({{i.from}})
+                  </div>
+
+
+                </ion-card-header>
+
+
+
+
+<ion-card-content>
+
+
+
+
+
+
+    <div class="" *ngIf=" Profiledata.mobilenumber==i.from && i.type == 'sending' && i.trans_status=='pending'  ">
+        You have Initiated transaction from
+        <b>{{i.toname | uppercase}}</b>({{i.to}})..
+        <br>
+        <br>
+      </div>
+
+      <div class="" *ngIf=" Profiledata.mobilenumber==i.from && i.type == 'sending' && i.trans_status=='success'  ">
+
+          <b>{{i.toname | uppercase}}</b>({{i.to}})
+          has accepted your money..
+          <br>
+          <br>
+        </div>
+
+        <div class="" *ngIf=" Profiledata.mobilenumber==i.from && i.type == 'sending' && i.trans_status=='rejected'  ">
+
+            <b>{{i.toname | uppercase}}</b>({{i.to}})
+            has rejected your money..
+            <br>
+            <br>
+          </div>
+
+      <div class="" *ngIf=" Profiledata.mobilenumber==i.to && i.type == 'sending' && i.trans_status=='pending' ">
+          <b> {{i.fromname | uppercase}}</b>({{i.from}})
+         wants to send you money
+          <br>
+           <br>
+         </div>
+
+
+         <div class="" *ngIf=" Profiledata.mobilenumber==i.to && i.type == 'sending' && i.trans_status=='success' ">
+            You accepted money from
+                <b> {{i.fromname | uppercase}}</b>({{i.from}})
+
+             <br>
+              <br>
+            </div>
+
+            <div class="" *ngIf=" Profiledata.mobilenumber==i.to && i.type == 'sending' && i.trans_status=='rejected' ">
+                You rejected money from
+                    <b> {{i.fromname | uppercase}}</b>({{i.from}})
+
+                 <br>
+                  <br>
+                </div>
+
+      <div class="" *ngIf=" Profiledata.mobilenumber==i.from && i.type == 'moneyrequest' && i.trans_status=='pending'  ">
+          You have requested money from
+          <b>{{i.toname | uppercase}}</b>({{i.to}})..
+          <br>
+          <br>
+        </div>
+
+        <div class="" *ngIf=" Profiledata.mobilenumber==i.from && i.type == 'moneyrequest' && i.trans_status=='success'  ">
+
+            <b>{{i.toname | uppercase}}</b>({{i.to}}) has accepted your request
+            <br>
+            <br>
+          </div>
+
+          <div class="" *ngIf=" Profiledata.mobilenumber==i.from && i.type == 'moneyrequest' && i.trans_status=='rejected'  ">
+
+              <b>{{i.toname | uppercase}}</b>({{i.to}})
+              has rejected your request
+              <br>
+              <br>
+            </div>
+
+            <div class="" *ngIf=" Profiledata.mobilenumber==i.from && i.type == 'moneyrequest' && i.trans_status=='canceled'  ">
+
+            You have canceled Your request..
+                <br>
+                <br>
+              </div>
+
+
+
+
+        <div class="" *ngIf=" Profiledata.mobilenumber==i.to && i.type == 'moneyrequest' && i.trans_status=='pending' ">
+            <b> {{i.fromname | uppercase}}</b>({{i.from}})
+          requested money from you
+            <br>
+             <br>
+           </div>
+
+           <div class="" *ngIf=" Profiledata.mobilenumber==i.to && i.type == 'moneyrequest' && i.trans_status=='success' ">
+              You have accepted the request from
+              <b> {{i.fromname | uppercase}}</b>({{i.from}})
+              <br>
+               <br>
+             </div>
+
+             <div class="" *ngIf=" Profiledata.mobilenumber==i.to && i.type == 'moneyrequest' && i.trans_status=='rejected' ">
+                You have rejected the request from
+                <b> {{i.fromname | uppercase}}</b>({{i.from}})
+                <br>
+                 <br>
+               </div>
+
+               <div class="" *ngIf=" Profiledata.mobilenumber==i.to && i.type == 'moneyrequest' && i.trans_status=='canceled' ">
+
+                  <b> {{i.fromname | uppercase}}</b>({{i.from}})
+                  has canceled the request
+                  <br>
+                   <br>
+                 </div>
+
+    <div class="">
+       Transaction ID is
+        <b>{{i.id}}</b>
+      </div>
+
+
+          <div class="">
+              Transaction status:
+              <!-- {{i.trans_status}} -->
+              <b *ngIf="i.trans_status=='success'" style="color: green">Success</b>
+              <b *ngIf="i.trans_status=='failed'" style="color: red">Failed</b>
+              <b *ngIf="i.trans_status=='pending'" style="color: blue">Pending</b>
+              <b *ngIf="i.trans_status=='canceled'" style="color:orangered">Canceled</b>
+              <b *ngIf="i.trans_status=='rejected'" style="color: red">Rejected</b>
+
+
+          </div>
+
+          <div class="" *ngIf=" Profiledata.mobilenumber==i.from && i.type == 'moneyrequest'">
+            Amount Requested:
+         <b> {{i.In}}</b>
+        </div>
+
+
+
+        <div class="" *ngIf=" Profiledata.mobilenumber==i.to && i.type == 'moneyrequest'">
+          Amount Requested:
+       <b> {{i.out}}</b>
+      </div>
+
+
+      <div class="" *ngIf=" Profiledata.mobilenumber==i.from && i.type == 'sending'">
+          Amount Sent:
+       <b> {{i.out}}</b>
+      </div>
+
+      <div class="" *ngIf=" Profiledata.mobilenumber==i.to && i.type == 'sending'">
+          Amount Received:
+       <b> {{i.In}}</b>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <div class="">
+              Your wallet balance:
+            <b>₹{{i.walletbal}}</b>
+          </div>
+
+
+
+          <b>{{i.timestamp}}</b>
+
+</ion-card-content>
+
+
+
+</ion-card>
+
+
+
+</ion-grid>
+</div>
+
+</ion-content>
+

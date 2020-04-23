@@ -1,0 +1,53 @@
+page-transactions {
+    .textwidth
+    {
+
+       font-weight: 100;
+  }
+  .textsize
+  {
+      font-size:100%;
+  }
+  .textsize1{
+    font-size:100%;
+  }
+  .textsize2
+  {
+      font-size:50%;
+  }
+  .comment::first-letter {
+    text-transform: uppercase;
+  }
+.time{
+
+    color: 	#A9A9A9;
+}
+.title{
+    font-weight: bold;
+    font-size: medium;
+}
+.example-container {
+    height: 800px;
+    overflow: auto;
+  }
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 50%;
+}
+
+.b{
+  box-shadow: 0 4px 8px 0 rgba(162, 193, 240, 0.2);
+  border-color: rgb(158, 182, 235);
+  padding: 20px;
+  margin: 10px;
+  border-radius: 5px;
+  border-style: solid;
+  }
+
+
+}

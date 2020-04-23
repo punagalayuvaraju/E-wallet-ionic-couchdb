@@ -1,0 +1,79 @@
+
+<ion-header>
+
+  <ion-navbar hideBackButton>
+      <ion-buttons left>
+          <button ion-button (click)="this.navCtrl.pop({animation: 'ios-transition'})" padding>
+              <ion-icon class="customIcon" name="arrow-back" style="zoom:1.4;"></ion-icon>
+          </button>
+      </ion-buttons>
+      <ion-title>Login</ion-title>
+   </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+    <form #userForm="ngForm" (ngSubmit)="login(userForm)" name="myForm">
+
+
+
+<ion-item>
+  <ion-label stacked>select</ion-label>
+  <ion-select name="uniquefield" [(ngModel)]="uniquefield" #mno1="ngModel" required>
+    <ion-option value="0"> Mobile Number</ion-option>
+    <ion-option value="1"> Email</ion-option>
+  </ion-select>
+
+</ion-item>
+<ion-label padding-left  style="color:red" *ngIf="mno1.invalid  && mno1.touched">required</ion-label>
+
+
+<div  *ngIf="userForm.value.uniquefield==0">
+
+    <ion-item [class.has-error]="mobile1.invalid && mobile1.touched" [class.has-success]="mobile1.valid">
+      <ion-label stacked>Mobile Number</ion-label>
+      <ion-input type="text" value=""class="form-control" [(ngModel)]="username" name="username" id="mobileno" pattern="[0-9]{10}" required #mobile1="ngModel"></ion-input>
+    </ion-item>
+    <ion-label padding-left  style="color:red" *ngIf="mobile1.touched && mobile1.pristine">Mobile number is required</ion-label>
+    <ion-label padding-left  style="color:red" *ngIf="mobile1.invalid && mobile1.dirty && mobile1.touched">Invalid Mobile number</ion-label>
+</div>
+
+<div  *ngIf="userForm.value.uniquefield==1">
+    <ion-item [class.has-error]="email1.invalid && email1.touched" [class.has-success]="email1.valid">
+
+  <ion-label stacked>Email </ion-label>
+  <ion-input  type="email" [(ngModel)]="username"  #email1="ngModel" name="username" pattern="([A-Za-z]|[0-9])[A-Za-z0-9.]+[A-Za-z0-9]+@[A-Za-z0-9]{2,}\[.]{1}[a-z]{2,3}" required></ion-input>
+</ion-item>
+  <ion-label padding-left  style="color:red" *ngIf="email1.touched && email1.pristine">email is required</ion-label>
+    <ion-label padding-left  style="color:red" *ngIf="email1.invalid && email1.dirty && email1.touched">Invalid email</ion-label>
+</div>
+
+
+    <ion-item [class.has-error]="pwd.invalid && pwd.touched" [class.has-success]="pwd.valid">
+
+
+      <ion-label  stacked>Password</ion-label>
+      <ion-input  type="{{type}}" clearOnEdit="false" class="form-control" [(ngModel)]="password" name="password" id="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@*#$%^&()])[A-Za-z0-9!@#$*%^&()]{8,14}"  required #pwd="ngModel">
+
+      </ion-input>
+      <button padding-top ion-button clear color="primary" style="zoom:1.3;" type="button" item-right *ngIf="show" (click)="myFunction()"><ion-icon  name="md-eye-off"></ion-icon></button>
+      <button padding-top ion-button clear color="primary" type="button" style="zoom:1.3;" item-right *ngIf="!show" (click)="myFunction()"><ion-icon  name="md-eye"></ion-icon></button>
+    </ion-item>
+    <ion-label padding-left  style="color:red" *ngIf="pwd.touched && pwd.pristine">Password is required</ion-label>
+<ion-label padding-left text-wrap text-justify style="color:red" *ngIf="pwd.invalid && pwd.dirty && pwd.touched">Must be combination of atleast one uppercase,one lowercase, one digit and one special character</ion-label>
+
+
+
+<ion-label text-center><button  type="submit" [disabled]="!userForm.valid" ion-button style="width: 50%" round>Login</button></ion-label>
+  <ion-label text-center><a text-center block (click)="forgetpassword()">Forgot Password</a></ion-label>
+  <div *ngIf="mydata" >
+    <ion-label text-center><ion-icon style="zoom:2;" (click)="fingerscan()" name="md-finger-print"></ion-icon></ion-label>
+    <ion-label text-center>Tap here to use fingerprint login</ion-label>
+  </div>
+
+  </form>
+
+</ion-content>

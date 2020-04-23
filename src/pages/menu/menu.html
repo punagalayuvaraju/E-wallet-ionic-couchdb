@@ -1,0 +1,109 @@
+<ion-menu [content]="content" (ionOpen)="menuOpened()" (ionClose)="menuClosed()">
+  <ion-header class="bg-image">
+
+      <ion-navbar >
+
+        <br>
+        <a menuClose (click)="openPage('ProfilePage')">
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <ion-title>
+                  <div  *ngIf="!Profiledata">
+                    <ion-grid no-padding>
+                        <ion-row>
+                          <ion-col >
+                              <ion-label style="padding-top:4%"  text-right>Loading</ion-label>
+
+                          </ion-col>
+                          <ion-col>
+                              <ion-label text-left><ion-spinner icon="android"></ion-spinner></ion-label>
+
+                          </ion-col>
+                        </ion-row>
+                              </ion-grid>
+
+                  </div>
+
+              <ion-grid no-padding *ngIf="Profiledata">
+                <ion-row>
+                  <ion-col text-wrap>
+
+                    <div class="textsize">{{Profiledata.name}}</div><div class="textwidth textsize app-font-20">{{Profiledata.email}}</div>
+                  </ion-col>
+                  <ion-col text-right><ion-icon item-end name="ios-arrow-forward"></ion-icon></ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-title><br>
+    </a>
+          </ion-navbar>
+
+    </ion-header>
+
+    <ion-content>
+    <ion-list no-lines no-padding>
+
+      <button ion-item menuClose (click)="openPage('RequestmoneyPage')" style="padding-top:3px;">
+          <ion-icon item-start name="ios-undo" style="zoom:1.1;" color="dark" ></ion-icon>
+           Request Money
+      </button>
+
+      <button ion-item menuClose (click)="openPage('SendmoneyPage')">
+          <ion-icon item-start name="ios-send" style="zoom:1.1;" color="violet" ></ion-icon>
+        Send Money
+      </button>
+      <button ion-item menuClose (click)="openPage('AddmoneyPage')">
+          <ion-icon item-start md="md-cash" style="zoom:1.1;" color="secondary" ></ion-icon>
+        Add Money
+      </button>
+      <button ion-item menuClose (click)="openPage('MessagesPage')">
+        <ion-icon item-start  md="md-chatboxes" style="zoom:1.1;" color="primary"  ></ion-icon>
+       Requests
+       <ion-badge *ngIf="count" item-right color="danger">{{count}}</ion-badge>
+
+    </button>
+      <button ion-item (click)="change()" >
+          <ion-icon  item-start md="md-people" style="zoom:1.1;"  color="add" ></ion-icon>
+          <ion-icon item-right *ngIf="!clicked" name="arrow-dropdown"></ion-icon>
+          <ion-icon item-right *ngIf="clicked" name="arrow-dropup"></ion-icon>
+          Beneficiary
+        </button>
+        <ion-item *ngIf="clicked">
+            <button ion-item menuClose (click)="openPage('AddbeneficiaryPage')" (click)="change()" padding-left>
+                <ion-icon  item-start md="md-person-add" style="zoom:1.1;"  color="primary" ></ion-icon>
+                Add Beneficiary
+              </button>
+              <button ion-item menuClose (click)="openPage('ViewbeneficiaryPage')" (click)="change()" padding-left>
+                  <ion-icon  item-start  md="md-person" style="zoom:1.1;"  color="primary" ></ion-icon>
+               View Beneficiary
+                </button>
+        </ion-item>
+      <button ion-item menuClose (click)="openPage('TransactionsPage')" >
+          <ion-icon  item-start name="ios-albums" style="zoom:1.1;" color="test"  ></ion-icon>
+        Transactions
+      </button>
+
+      <button ion-item  >
+        <ion-icon item-start md="md-finger-print" style="zoom:1.1;" color="dark"  ></ion-icon>
+        <ion-label>Use-Fingerprint</ion-label>
+        <!-- <button (click)="setfinger()">  -->
+          <ion-toggle (ionChange)="setfinger()" checked="{{myval}}"></ion-toggle>
+        <!-- </button> -->
+
+    </button>
+      <button ion-item menuClose (click)="openPage('ChangepasswordPage')">
+          <ion-icon item-start md="md-settings" style="zoom:1.1;" color="dark"  ></ion-icon>
+        Change Password
+      </button>
+      <button ion-item menuClose (click)="openPage('HomePage')">
+          <ion-icon item-start md="md-log-out" style="zoom:1.1;color:rgb(221, 21, 21)"  ></ion-icon>
+        Logout
+      </button>
+
+    </ion-list>
+    </ion-content>
+
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

@@ -1,0 +1,27 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{data.title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+
+<ion-content padding>
+
+    <p>{{data.content}}</p>
+    <ion-label *ngIf=data.otpflag>
+      <ion-input  [(ngModel)]="data.otp"></ion-input>
+    </ion-label>
+  </div>
+
+  <div ion-dialog-actions>
+    <button ion-button (click)="onNoClick()">No</button>
+    <button ion-button [ion-dialog-close]="data.otp" *ngIf=data.otpflag cdkFocusInitial>Yes</button>
+    <button ion-button [ion-dialog-close]=true *ngIf=!data.otpflag cdkFocusInitial>Yes</button>
+  </div>
+
+</ion-content>

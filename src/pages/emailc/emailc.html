@@ -1,0 +1,35 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>emailc</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <form #sendForm="ngForm" (ngSubmit)="sendmoney(sendForm)" name="myForm">
+
+
+    <ion-item  [class.has-error]="pwd6.invalid && pwd6.touched" [class.has-success]="pwd6.valid">
+  <ion-label stacked><b>Enter OTP here </b></ion-label>       
+  <ion-input type="text" class="form-control" [(ngModel)]="otp" name="otp" placeholder="Old Password" pattern="[a-zA-Z0-9]{6}"required #pwd6="ngModel"></ion-input>
+</ion-item>
+<ion-label padding-left  style="color:red" *ngIf="pwd6.invalid && pwd6.dirty && pwd6.touched">Enter the password of 8 to 14 characters</ion-label>
+
+
+
+    <ion-label text-center><button type="submit" [disabled]="!sendForm.valid"  ion-button>Submit</button></ion-label>
+    
+ 
+
+</form>
+
+</ion-content>
+
+
+
+

@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-buttons left>
+            <button ion-button (click)="this.navCtrl.pop({animation: 'ios-transition'})" padding>
+                <ion-icon class="customIcon" name="arrow-back" style="zoom:1.4;"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>Add Beneficiary</ion-title>
+     </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+
+        <form #addbeneficiaryForm="ngForm" (ngSubmit)="addbeneficiary(addbeneficiaryForm)" name="addbeneficiaryForm">
+    <ion-item  [class.has-error]="name1.invalid && name1.touched" [class.has-success]="name1.valid">
+        <ion-label stacked><b>Name </b></ion-label>
+        <ion-input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Ex: Jhonny" pattern="[a-zA-Z ]{0,}"required #name1="ngModel"></ion-input>
+      </ion-item>
+      <ion-label padding-left style="color:red"  *ngIf="name1.touched && name1.pristine">Name is required</ion-label>
+      <ion-label padding-left  style="color:red"  *ngIf="name1.invalid && name1.dirty && name1.touched">Invalid name</ion-label>
+
+  <ion-item  [class.has-error]="mno1.invalid && mno1.touched" [class.has-success]="mno1.valid">
+      <ion-label stacked><b>Mobile number</b></ion-label>
+      <ion-input type="text" class="form-control" [(ngModel)]="mno" placeholder="Ex: 9876543210" name="mno" pattern="[0-9]{10}" required #mno1="ngModel"></ion-input>
+
+    </ion-item>
+    <ion-label padding-left style="color:red"  *ngIf="mno1.pristine && mno1.touched">Mobile number is required</ion-label>
+    <ion-label padding-left style="color:red"  *ngIf="mno1.invalid && mno1.dirty && mno1.touched">Invalid Mobile number</ion-label>
+
+    <ion-label text-center><button ion-button type="submit" [disabled]="!addbeneficiaryForm.valid">Add beneficiary</button></ion-label>
+</form>
+
+</ion-content>
