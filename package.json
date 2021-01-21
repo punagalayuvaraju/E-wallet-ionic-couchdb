@@ -72,7 +72,7 @@
     "random-number": "0.0.9",
     "request": "^2.87.0",
     "rxjs": "5.5.11",
-    "socket.io": "^2.1.1",
+    "socket.io": "^2.4.0",
     "socket.io-client": "^2.1.1",
     "sw-toolbox": "3.6.0",
     "util": "^0.11.0",
