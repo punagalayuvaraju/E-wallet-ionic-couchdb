@@ -58,7 +58,7 @@
     "http": "0.0.0",
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
-    "mathjs": "^5.0.4",
+    "mathjs": "^7.5.1",
     "moment": "^2.22.2",
     "morgan": "^1.9.0",
     "nano": "^6.4.4",
