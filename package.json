@@ -64,7 +64,7 @@
     "nano": "^6.4.4",
     "ng-socket-io": "^0.2.4",
     "ngx-qrcode2": "0.0.9",
-    "nodemailer": "^4.6.7",
+    "nodemailer": "^6.4.16",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
